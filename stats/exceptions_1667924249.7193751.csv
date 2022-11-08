@@ -1,0 +1,23 @@
+Count,Message,Traceback,Nodes
+249,Expecting value: line 1 column 1 (char 0),"  File ""D:\media\Desktop\cours\EPSI\metodologie test\TP_tuc_examen\venv\lib\site-packages\locust\user\task.py"", line 347, in run
+    self.execute_next_task()
+  File ""D:\media\Desktop\cours\EPSI\metodologie test\TP_tuc_examen\venv\lib\site-packages\locust\user\task.py"", line 372, in execute_next_task
+    self.execute_task(self._task_queue.pop(0))
+  File ""D:\media\Desktop\cours\EPSI\metodologie test\TP_tuc_examen\venv\lib\site-packages\locust\user\task.py"", line 493, in execute_task
+    task(self.user)
+  File ""D:\media\Desktop\cours\EPSI\metodologie test\TP_tuc_examen\locustfile.py"", line 18, in get_home
+    self.pokemon_1_id = response.json()[""id""]
+  File ""D:\media\Desktop\cours\EPSI\metodologie test\TP_tuc_examen\venv\lib\site-packages\requests\models.py"", line 975, in json
+    raise RequestsJSONDecodeError(e.msg, e.doc, e.pos)
+",local
+529,Expecting value: line 1 column 1 (char 0),"  File ""D:\media\Desktop\cours\EPSI\metodologie test\TP_tuc_examen\venv\lib\site-packages\locust\user\task.py"", line 347, in run
+    self.execute_next_task()
+  File ""D:\media\Desktop\cours\EPSI\metodologie test\TP_tuc_examen\venv\lib\site-packages\locust\user\task.py"", line 372, in execute_next_task
+    self.execute_task(self._task_queue.pop(0))
+  File ""D:\media\Desktop\cours\EPSI\metodologie test\TP_tuc_examen\venv\lib\site-packages\locust\user\task.py"", line 493, in execute_task
+    task(self.user)
+  File ""D:\media\Desktop\cours\EPSI\metodologie test\TP_tuc_examen\locustfile.py"", line 16, in get_home
+    self.trainer_1_id = response.json()[""id""]
+  File ""D:\media\Desktop\cours\EPSI\metodologie test\TP_tuc_examen\venv\lib\site-packages\requests\models.py"", line 975, in json
+    raise RequestsJSONDecodeError(e.msg, e.doc, e.pos)
+",local
