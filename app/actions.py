@@ -10,11 +10,11 @@ def get_trainer(database: Session, trainer_id: int):
     return database.query(models.Trainer).filter(models.Trainer.id == trainer_id).first()
 
 
-def get_trainer_by_name(database: Session, name: str):
+def get_trainer_by_name(database: Session, trainer_name: str):
     """
         Find a user by his name
     """
-    return database.query(models.Trainer).filter(models.Trainer.name == name).all()
+    return database.query(models.Trainer).filter(models.Trainer.name == trainer_name).first()
 
 
 def get_trainers(database: Session, skip: int = 0, limit: int = 100):
@@ -52,7 +52,7 @@ def add_trainer_item(database: Session, item: schemas.ItemCreate, trainer_id: in
     """
         Create an item and link it to a trainer
     """
-    db_item = models.Item(**item.dict(), owner_id=trainer_id)
+    db_item = models.Item(**item.dict(), trainer_id=trainer_id)
     database.add(db_item)
     database.commit()
     database.refresh(db_item)

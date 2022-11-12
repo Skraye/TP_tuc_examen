@@ -35,6 +35,17 @@ def get_trainer(trainer_id: int, database: Session = Depends(get_db)):
     return db_trainer
 
 
+@router.get("/by_name/{trainer_name}", response_model=schemas.Trainer)
+def get_trainer(trainer_name: str, database: Session = Depends(get_db)):
+    """
+        Return trainer from his name
+    """
+    db_trainer = actions.get_trainer_by_name(database, trainer_name=trainer_name)
+    if db_trainer is None:
+        raise HTTPException(status_code=404, detail="Trainer not found")
+    return db_trainer
+
+
 @router.post("/{trainer_id}/item/", response_model=schemas.Item)
 def create_item_for_trainer(
     trainer_id: int, item: schemas.ItemCreate, database: Session = Depends(get_db)
