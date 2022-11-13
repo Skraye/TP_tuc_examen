@@ -1,0 +1,16 @@
+{
+    "pokemon1": {
+        "api_id": 2,
+        "custom_name": "string",
+        "id": 1,
+        "name": "string",
+        "trainer_id": 0
+    },
+    "pokemon2": {
+        "api_id": 2,
+        "custom_name": "string",
+        "id": 2,
+        "name": "string",
+        "trainer_id": 0
+    }
+}
