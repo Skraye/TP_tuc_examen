@@ -1,6 +1,6 @@
 import requests
 
-base_url = "https://pokeapi.co/api/v2"
+BASE_URL = "https://pokeapi.co/api/v2"
 
 
 def get_pokemon_name(api_id):
@@ -11,28 +11,60 @@ def get_pokemon_name(api_id):
 
 def get_pokemon_stats(api_id):
     """
-        Get pokemon stats from the API pokeapi
+        Get pokemon stats from the pokeapi API
     """
-    return False
+    #Nous avons choisi que 4 stats par pokemon
+    pokemon_data = get_pokemon_data(api_id)
+
+    pokemon_stats = {
+        pokemon_data["stats"][0]["stat"]["name"]:
+        pokemon_data["stats"][0]["base_stat"],    #HP
+        pokemon_data["stats"][1]["stat"]["name"]:
+        pokemon_data["stats"][0]["base_stat"],    #Attack
+        pokemon_data["stats"][2]["stat"]["name"]:
+        pokemon_data["stats"][0]["base_stat"],    #Defense
+        pokemon_data["stats"][3]["stat"]["name"]:
+        pokemon_data["stats"][0]["base_stat"],    #Special attack
+        pokemon_data["stats"][4]["stat"]["name"]:
+        pokemon_data["stats"][0]["base_stat"],    #Special defense
+        pokemon_data["stats"][5]["stat"]["name"]:
+        pokemon_data["stats"][0]["base_stat"]     #Speed
+    }
+
+    return pokemon_stats
 
 def get_pokemon_data(api_id):
     """
         Get data of pokemon name from the API pokeapi
     """
-    return requests.get(f"{base_url}/pokemon/{api_id}", timeout=10).json()
+    return requests.get(f"{BASE_URL}/pokemon/{api_id}", timeout=10).json()
 
 
 def battle_pokemon(first_api_id, second_api_id):
     """
         Do battle between 2 pokemons
     """
-    premierPokemon = get_pokemon_data(first_api_id)
-    secondPokemon = get_pokemon_data(second_api_id)
-    battle_result = 0
-    return premierPokemon if battle_result > 0 else secondPokemon if battle_result < 0 else {'winner': 'draw'}
+
+    first_pokemon = get_pokemon_stats(first_api_id)
+    second_pokemon = get_pokemon_stats(second_api_id)
+    battle_result = battle_compare_stats(first_pokemon, second_pokemon)
+
+    return ({'winner' : first_pokemon} if battle_result > 0
+    else {'winner' : second_pokemon} if battle_result < 0
+    else {'winner' : 'draw'})
 
 
-def battle_compare_stats(first_pokemon_stats, second_pokemon_stats):
+def battle_compare_stats(pokemon_stats_1, pokemon_stats_2):
     """
-        Compare given stat between two pokemons
+        Compare given stats between 2 pokemons
     """
+    result = 0
+
+    for stat in pokemon_stats_1:
+        if pokemon_stats_1[stat] > pokemon_stats_2[stat]:
+            result += 1
+        elif pokemon_stats_1[stat] < pokemon_stats_2[stat]:
+            result -= 1
+        else:
+            continue
+    return result
