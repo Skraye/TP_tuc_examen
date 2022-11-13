@@ -5,3 +5,8 @@
 *htmlcov*
 *venv*
 *prof*
+Include/
+Lib/
+Scripts/
+*.db
+.idea/

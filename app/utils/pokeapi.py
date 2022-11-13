@@ -1,6 +1,7 @@
+"""Test pokeapi functions"""
 import requests
 
-base_url = "https://pokeapi.co/api/v2"
+BASE_URL = "https://pokeapi.co/api/v2"
 
 
 def get_pokemon_name(api_id):
@@ -9,30 +10,35 @@ def get_pokemon_name(api_id):
     """
     return get_pokemon_data(api_id)['name']
 
-def get_pokemon_stats(api_id):
-    """
-        Get pokemon stats from the API pokeapi
-    """
-    return False
 
 def get_pokemon_data(api_id):
     """
         Get data of pokemon name from the API pokeapi
     """
-    return requests.get(f"{base_url}/pokemon/{api_id}", timeout=10).json()
+    return requests.get(f"{BASE_URL}/pokemon/{api_id}", timeout=10).json()
 
 
-def battle_pokemon(first_api_id, second_api_id):
+def battle_pokemon(pokemon_1_api_id, pokemon_2_api_id):
     """
         Do battle between 2 pokemons
+        return the name of the pokemon winner
     """
-    premierPokemon = get_pokemon_data(first_api_id)
-    secondPokemon = get_pokemon_data(second_api_id)
-    battle_result = 0
-    return premierPokemon if battle_result > 0 else secondPokemon if battle_result < 0 else {'winner': 'draw'}
+    premier_pokemon = get_pokemon_data(pokemon_1_api_id)
+    second_pokemon = get_pokemon_data(pokemon_2_api_id)
 
+    compteur_1 = 0
+    compteur_2 = 0
+    # Parcourir les stats des pokemons si  le Pokemon 1 > Pokemon 2  alors on rajoute +1 au compteur
+    for i in range(min(len(premier_pokemon['stats']), len(second_pokemon['stats']))):
+        if premier_pokemon['stats'][i]['base_stat'] > second_pokemon['stats'][i]['base_stat']:
+            compteur_1 += 1
+        elif premier_pokemon['stats'][i]['base_stat'] == second_pokemon['stats'][i]['base_stat']:
+            pass
+        else:
+            compteur_2 += 1
 
-def battle_compare_stats(first_pokemon_stats, second_pokemon_stats):
-    """
-        Compare given stat between two pokemons
-    """
+    if compteur_1 > compteur_2:
+        return premier_pokemon["forms"][0]['name']
+    if compteur_1 == compteur_2:
+        return premier_pokemon["forms"][0]['name'] + "égalité avec " + second_pokemon["forms"][0]['name']
+    return second_pokemon["forms"][0]['name']

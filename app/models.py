@@ -1,3 +1,4 @@
+"""Object models"""
 from sqlalchemy import Column, ForeignKey, Integer, String, Date
 from sqlalchemy.orm import relationship
 from .sqlite import Base
@@ -16,6 +17,7 @@ class Trainer(Base):
     inventory = relationship("Item", back_populates="trainer")
     pokemons = relationship("Pokemon", back_populates="trainer")
 
+
 class Pokemon(Base):
     """
         Class representing a pokemon
@@ -32,6 +34,7 @@ class Pokemon(Base):
     trainer_id = Column(Integer, ForeignKey("trainers.id"))
 
     trainer = relationship("Trainer", back_populates="pokemons")
+
 
 class Item(Base):
     """
