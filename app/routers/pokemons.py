@@ -1,8 +1,9 @@
+"""Module providingFunction printing python version."""
 from typing import List
 from sqlalchemy.orm import Session
 from fastapi import APIRouter,  Depends
-from app import actions, schemas
-from app.utils.utils import get_db
+from .. import actions, schemas
+from ..utils.utils import get_db
 
 router = APIRouter()
 

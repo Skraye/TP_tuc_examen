@@ -1,12 +1,13 @@
+"""Module providingFunction printing python version."""
+import attr
 from sqlalchemy import Column, ForeignKey, Integer, String, Date
 from sqlalchemy.orm import relationship
 from .sqlite import Base
 
 
-class Trainer(Base):
-    """
-        Class representing a pokemon trainer
-    """
+@attr.s
+class Trainer(Base):  # pylint: disable=too-few-public-methods
+    """Class representing a pokemon trainer"""
     __tablename__ = "trainers"
 
     id = Column(Integer, primary_key=True, index=True)
@@ -16,15 +17,10 @@ class Trainer(Base):
     inventory = relationship("Item", back_populates="trainer")
     pokemons = relationship("Pokemon", back_populates="trainer")
 
-class Pokemon(Base):
-    """
-        Class representing a pokemon
-        Parameters:
-            api_id (int): id from the pokeapi
-            name (str): Populate with the pokeapi data 
-    """
-    __tablename__ = "pokemons"
 
+class Pokemon(Base):  # pylint: disable=too-few-public-methods
+    """Class representing a Pokemon"""
+    __tablename__ = "pokemons"
     id = Column(Integer, primary_key=True, index=True)
     api_id = Column(Integer, index=True)
     name = Column(String, index=True)
@@ -33,7 +29,8 @@ class Pokemon(Base):
 
     trainer = relationship("Trainer", back_populates="pokemons")
 
-class Item(Base):
+
+class Item(Base):  # pylint: disable=too-few-public-methods
     """
         Class representing a pokemon trainer
     """

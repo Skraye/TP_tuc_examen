@@ -1,11 +1,14 @@
+"""Module providingFunction printing python version."""
 from typing import List
 from sqlalchemy.orm import Session
 from fastapi import APIRouter,  Depends
-from app.utils.utils import get_db
-from app import actions, schemas
+# This is a placeholder for correct code for this message.
+from ..utils.utils import get_db
+from .. import actions, schemas
 
 
 router = APIRouter()
+
 
 @router.get("/", response_model=List[schemas.Item])
 def get_items(skip: int = 0, limit: int = 100, database: Session = Depends(get_db)):
