@@ -10,7 +10,9 @@ class ItemBase(BaseModel):
     description: Union[str, None] = None
 
 class ItemCreate(ItemBase):
-    pass
+    """
+    Creation item
+    """
 
 class Item(ItemBase):
     id: int
@@ -27,7 +29,9 @@ class PokemonBase(BaseModel):
     custom_name: Optional[str] = None
 
 class PokemonCreate(PokemonBase):
-    pass
+    """
+    creation pokemon
+    """
 
 class Pokemon(PokemonBase):
     id: int
@@ -44,7 +48,9 @@ class TrainerBase(BaseModel):
     birthdate: date
 
 class TrainerCreate(TrainerBase):
-    pass
+    """
+    creation trainer
+    """
 
 class Trainer(TrainerBase):
     id: int
